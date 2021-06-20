@@ -1,3 +1,7 @@
+///
+/// [![Docs.rs](https://img.shields.io/badge/docs.rs-perpendicular-66c2a5?style=for-the-badge&labelColor=555555&logoColor=white&logo=data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDUxMiA1MTIiPjxwYXRoIGZpbGw9IiNmNWY1ZjUiIGQ9Ik00ODguNiAyNTAuMkwzOTIgMjE0VjEwNS41YzAtMTUtOS4zLTI4LjQtMjMuNC0zMy43bC0xMDAtMzcuNWMtOC4xLTMuMS0xNy4xLTMuMS0yNS4zIDBsLTEwMCAzNy41Yy0xNC4xIDUuMy0yMy40IDE4LjctMjMuNCAzMy43VjIxNGwtOTYuNiAzNi4yQzkuMyAyNTUuNSAwIDI2OC45IDAgMjgzLjlWMzk0YzAgMTMuNiA3LjcgMjYuMSAxOS45IDMyLjJsMTAwIDUwYzEwLjEgNS4xIDIyLjEgNS4xIDMyLjIgMGwxMDMuOS01MiAxMDMuOSA1MmMxMC4xIDUuMSAyMi4xIDUuMSAzMi4yIDBsMTAwLTUwYzEyLjItNi4xIDE5LjktMTguNiAxOS45LTMyLjJWMjgzLjljMC0xNS05LjMtMjguNC0yMy40LTMzLjd6TTM1OCAyMTQuOGwtODUgMzEuOXYtNjguMmw4NS0zN3Y3My4zek0xNTQgMTA0LjFsMTAyLTM4LjIgMTAyIDM4LjJ2LjZsLTEwMiA0MS40LTEwMi00MS40di0uNnptODQgMjkxLjFsLTg1IDQyLjV2LTc5LjFsODUtMzguOHY3NS40em0wLTExMmwtMTAyIDQxLjQtMTAyLTQxLjR2LS42bDEwMi0zOC4yIDEwMiAzOC4ydi42em0yNDAgMTEybC04NSA0Mi41di03OS4xbDg1LTM4Ljh2NzUuNHptMC0xMTJsLTEwMiA0MS40LTEwMi00MS40di0uNmwxMDItMzguMiAxMDIgMzguMnYuNnoiPjwvcGF0aD48L3N2Zz4K)](https://docs.rs/perpendicular)
+/// [![Crates.io](https://img.shields.io/crates/v/perpendicular?logo=rust&style=for-the-badge)](https://crates.io/crates/perpendicular)
+///
 /// Perpendicular is a simple general purpose n-dimensional vector library.
 ///
 /// This is not a general purpose linear algebra library. Instead, it's designed
@@ -5,6 +9,17 @@
 /// or velocities together.
 ///
 /// All library documentation can be found on the [`Vector`] struct.
+/// 
+/// ```rust
+/// use perpendicular::Vector;
+///
+/// let v1 = Vector::new((1, 2, 3));
+/// let v2 = Vector::new((3, 4, 5));
+/// let v3 = Vector::new((5, 6, 7));
+///
+/// println!("{}", v1 + v2 * v3);
+///
+/// ```
 use array_init::from_iter;
 use core::fmt;
 use core::ops::{Add, Div, Index, IndexMut, Mul, Neg, Rem, Sub};
@@ -28,15 +43,18 @@ pub struct Vector<T, const DIM: usize> {
     values: [T; DIM],
 }
 
+/// Type alias for 2d vector
 pub type Vector2<T> = Vector<T, 2>;
+/// Type alias for 3d vector
 pub type Vector3<T> = Vector<T, 3>;
+/// Type alias for 4d vector
 pub type Vector4<T> = Vector<T, 4>;
 
 impl<T> Vector4<T> {
     /// Create a new 4D vector
     ///
     /// ```rust
-    /// # use vectornd::Vector;
+    /// # use perpendicular::Vector;
     /// let v = Vector::new4(1, 2, 3, 4);
     ///
     /// assert_eq!(v.dimensions(), 4);
@@ -50,7 +68,7 @@ impl<T> Vector3<T> {
     /// Create a new 2D vector
     ///
     /// ```rust
-    /// # use vectornd::Vector;
+    /// # use perpendicular::Vector;
     /// let v = Vector::new3(1, 2, 3);
     ///
     /// assert_eq!(v.dimensions(), 3);
@@ -64,7 +82,7 @@ impl<T> Vector2<T> {
     /// Create a new 2D vector
     ///
     /// ```rust
-    /// # use vectornd::Vector;
+    /// # use perpendicular::Vector;
     /// let v = Vector::new2(1, 2);
     ///
     /// assert_eq!(v.dimensions(), 2);
@@ -78,7 +96,7 @@ impl<T, const DIM: usize> Vector<T, DIM> {
     /// Create a new Vector
     ///
     /// ```rust
-    /// # use vectornd::Vector;
+    /// # use perpendicular::Vector;
     ///
     /// let v = Vector::new([1, 2]);
     /// ```
@@ -98,7 +116,7 @@ impl<T, const DIM: usize> Vector<T, DIM> {
     /// items in the iterator do no much the dimension of the desired vector.
     ///
     /// ```rust
-    /// # use vectornd::Vector;
+    /// # use perpendicular::Vector;
     ///
     /// assert_eq!(Vector::try_new(vec![1, 2]), Some(Vector::new2(1, 2)));
     /// assert_eq!(Vector::try_new(vec![1, 2, 3]), Option::<Vector<_, 2>>::None);
@@ -127,7 +145,7 @@ impl<T, const DIM: usize> Vector<T, DIM> {
     /// However, it may not be shorter then the desired vector.
     ///
     /// ```rust
-    /// # use vectornd::Vector;
+    /// # use perpendicular::Vector;
     ///
     /// assert_eq!(Vector::try_new_overflow(vec![1, 2]), Some(Vector::new2(1, 2)));
     /// assert_eq!(Vector::try_new_overflow(vec![1, 2, 3]), Some(Vector::new2(1, 2)));
@@ -146,7 +164,7 @@ impl<T, const DIM: usize> Vector<T, DIM> {
     /// Get the number of dimensions this vector has
     ///
     /// ```rust
-    /// # use vectornd::Vector;
+    /// # use perpendicular::Vector;
     /// let v = Vector::new([1, 2, 3, 4]);
     ///
     /// assert_eq!(v.dimensions(), 4);
@@ -158,7 +176,7 @@ impl<T, const DIM: usize> Vector<T, DIM> {
     /// get a reference to the nth item in the vector
     ///
     /// ```rust
-    /// # use vectornd::Vector;
+    /// # use perpendicular::Vector;
     ///
     /// let mut v = Vector::new2(1, 2);
     /// assert_eq!(v.get(0), Some(&1));
@@ -172,7 +190,7 @@ impl<T, const DIM: usize> Vector<T, DIM> {
     /// get a mutable reference to the nth item in the vector
     ///
     /// ```rust
-    /// # use vectornd::Vector;
+    /// # use perpendicular::Vector;
     ///
     /// let mut v = Vector::new2(1, 2);
     /// assert_eq!(v.get_mut(0), Some(&mut 1));
@@ -186,7 +204,7 @@ impl<T, const DIM: usize> Vector<T, DIM> {
     /// Create an iterator over references to items in the vector
     ///
     /// ```rust
-    /// # use vectornd::Vector;
+    /// # use perpendicular::Vector;
     ///
     /// let v = Vector::new2(1, 2);
     /// let mut i = v.iter();
@@ -201,7 +219,7 @@ impl<T, const DIM: usize> Vector<T, DIM> {
     /// Create an iterator over mutable references to items in the vector
     ///
     /// ```rust
-    /// # use vectornd::Vector;
+    /// # use perpendicular::Vector;
     ///
     /// let mut v = Vector::new2(1, 2);
     /// let mut i = v.iter_mut();
@@ -211,7 +229,7 @@ impl<T, const DIM: usize> Vector<T, DIM> {
     /// ```
     ///
     /// ```rust
-    /// # use vectornd::Vector;
+    /// # use perpendicular::Vector;
     ///
     /// let mut v = Vector::new2(1, 2);
     /// {
@@ -228,7 +246,7 @@ impl<T, const DIM: usize> Vector<T, DIM> {
     /// by n.
     ///
     /// ```rust
-    /// # use vectornd::Vector;
+    /// # use perpendicular::Vector;
     ///
     /// let v = Vector::new([1, 2, 3]);
     ///
@@ -247,7 +265,7 @@ impl<T, const DIM: usize> Vector<T, DIM> {
     /// Unscale a vector by a scalar. This divides every element by n.
     ///
     /// ```rust
-    /// # use vectornd::Vector;
+    /// # use perpendicular::Vector;
     ///
     /// let v = Vector::new([4, 8, 16]);
     ///
@@ -273,7 +291,7 @@ where
     /// Calculate the magnitude of this vector
     ///
     /// ```rust
-    /// # use vectornd::Vector;
+    /// # use perpendicular::Vector;
     ///
     /// let mut v = Vector::new2(3, 4);
     ///
@@ -295,7 +313,7 @@ where
     /// Create a new vector with the same direction but another magnitude
     ///
     /// ```rust
-    /// # use vectornd::Vector;
+    /// # use perpendicular::Vector;
     /// let mut v = Vector::new2(3, 4);
     ///
     /// assert_eq!(v.with_magnitude(10), Vector::new((6.0, 8.0)))
@@ -311,7 +329,7 @@ where
     /// Normalizes the vector. Sets the magnitude to 1.
     ///
     /// ```rust
-    /// # use vectornd::Vector;
+    /// # use perpendicular::Vector;
     /// let mut v = Vector::new2(3, 4);
     ///
     /// assert_eq!(v.normalize(), Vector::new((3.0/5.0, 4.0/5.0)))
@@ -328,7 +346,7 @@ where
     /// is larger than the limit, the magnitude is set to this limit.
     ///
     /// ```rust
-    /// # use vectornd::Vector;
+    /// # use perpendicular::Vector;
     ///
     /// assert_eq!(Vector::new2(3, 4).limit(10), Vector::new((3.0, 4.0)));
     /// assert_eq!(Vector::new2(9, 12).limit(10), Vector::new((6.0, 8.0)));
@@ -348,7 +366,7 @@ where
     /// Calculates the angle between two vectors (in radians)
     ///
     /// ```
-    /// # use vectornd::Vector;
+    /// # use perpendicular::Vector;
     ///
     /// let mut v1 = Vector::new2(0, 1);
     /// let mut v2 = Vector::new2(1, 0);
@@ -368,7 +386,7 @@ where
     /// Calculate the distance from this vector to another vector
     ///
     /// ```rust
-    /// # use vectornd::Vector;
+    /// # use perpendicular::Vector;
     ///
     /// let mut v1 = Vector::new2(0, 0);
     /// let mut v2 = Vector::new2(3, 4);
@@ -387,7 +405,7 @@ where
     /// Calculate the dot product of this vector
     ///
     /// ```rust
-    /// # use vectornd::Vector;
+    /// # use perpendicular::Vector;
     ///
     /// let v1 = Vector::new((1, 2));
     /// let v2 = Vector::new((&2, &1));
@@ -407,7 +425,7 @@ where
     /// Find if the angle between two vectors is 90 degrees
     ///
     /// ```rust
-    /// # use vectornd::Vector;
+    /// # use perpendicular::Vector;
     ///
     /// let v1 = Vector::new((0, 1));
     /// let v2 = Vector::new((1, 0));
@@ -433,8 +451,8 @@ pub trait MapVector<T, const DIM: usize> {
     /// Map an operation over every element of the vector
     ///
     /// ```rust
-    /// # use crate::vectornd::Vector;
-    /// use vectornd::MapVector;
+    /// # use crate::perpendicular::Vector;
+    /// use perpendicular::MapVector;
     /// let v = Vector::new((1, 2, 3, 4));
     /// assert_eq!(v.clone().map(|i| i * 3), Vector::new((3, 6, 9, 12)));
     /// assert_eq!(v.clone().map(|i| -i), Vector::new((-1, -2, -3, -4)));
