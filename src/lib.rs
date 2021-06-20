@@ -9,7 +9,7 @@
 /// or velocities together.
 ///
 /// All library documentation can be found on the [`Vector`] struct.
-/// 
+///
 /// ```rust
 /// use perpendicular::Vector;
 ///
@@ -126,9 +126,9 @@ impl<T, const DIM: usize> Vector<T, DIM> {
     pub fn try_new(i: impl IntoIterator<Item = T>) -> Option<Self> {
         let i = i.into_iter();
         match i.size_hint() {
-            (lower, _) if lower < DIM => return None,
-            (_, Some(upper)) if upper > DIM => return None,
-            (lower, Some(upper)) if lower == upper && lower != DIM => return None,
+            (lower, _) if lower < DIM => None,
+            (_, Some(upper)) if upper > DIM => None,
+            (lower, Some(upper)) if lower == upper && lower != DIM => None,
             _ => {
                 let collected: Vec<_> = i.collect();
                 if collected.len() != DIM {
