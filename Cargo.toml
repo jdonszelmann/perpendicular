@@ -1,11 +1,15 @@
 [package]
 name = "perpendicular"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2018"
 license = "Apache-2.0"
 description = "Perpendicular is a simple general purpose n-dimensional vector library."
-keywords = ["vector", "physics", ""]
+keywords = ["vector", "physics", "simulation"]
 categories = ["Data Structures", "No standard library", "Rendering", "Game development", "Simulation"]
+documentation = "https://docs.rs/perpendicular"
+homepage = "https://github.com/jonay2000/perpendicular"
+repository = "https://github.com/jonay2000/perpendicular"
+authors = ["jonay2000 <jonabent@gmail.com>"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
