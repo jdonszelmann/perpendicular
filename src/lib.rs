@@ -282,6 +282,30 @@ impl<T, const DIM: usize> Vector<T, DIM> {
             from_iter(self.iter().map(|x| x / other.clone())).expect(same_length!()),
         )
     }
+
+    /// Create a vector filled with the zero value of T (according to num)
+    ///
+    /// ```rust
+    /// # use perpendicular::Vector;
+    ///
+    /// let v = Vector::new((0, 0, 0));
+    /// assert_eq!(Vector::zero(), v);
+    /// ```
+    pub fn zero() -> Self where T: num::Num + Clone {
+        Self::repeat(T::zero())
+    }
+
+    /// Create a vector filled with the one value of T (according to num)
+    ///
+    /// ```rust
+    /// # use perpendicular::Vector;
+    ///
+    /// let v = Vector::new((1, 1, 1));
+    /// assert_eq!(Vector::one(), v);
+    /// ```
+    pub fn one() -> Self where T: num::Num + Clone {
+        Self::repeat(T::one())
+    }
 }
 
 impl<T, const DIM: usize> Vector<T, DIM>
