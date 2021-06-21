@@ -1,5 +1,6 @@
 ///
-/// [![Docs.rs](https://img.shields.io/badge/docs.rs-perpendicular-66c2a5?style=for-the-badge&labelColor=555555&logoColor=white&logo=data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDUxMiA1MTIiPjxwYXRoIGZpbGw9IiNmNWY1ZjUiIGQ9Ik00ODguNiAyNTAuMkwzOTIgMjE0VjEwNS41YzAtMTUtOS4zLTI4LjQtMjMuNC0zMy43bC0xMDAtMzcuNWMtOC4xLTMuMS0xNy4xLTMuMS0yNS4zIDBsLTEwMCAzNy41Yy0xNC4xIDUuMy0yMy40IDE4LjctMjMuNCAzMy43VjIxNGwtOTYuNiAzNi4yQzkuMyAyNTUuNSAwIDI2OC45IDAgMjgzLjlWMzk0YzAgMTMuNiA3LjcgMjYuMSAxOS45IDMyLjJsMTAwIDUwYzEwLjEgNS4xIDIyLjEgNS4xIDMyLjIgMGwxMDMuOS01MiAxMDMuOSA1MmMxMC4xIDUuMSAyMi4xIDUuMSAzMi4yIDBsMTAwLTUwYzEyLjItNi4xIDE5LjktMTguNiAxOS45LTMyLjJWMjgzLjljMC0xNS05LjMtMjguNC0yMy40LTMzLjd6TTM1OCAyMTQuOGwtODUgMzEuOXYtNjguMmw4NS0zN3Y3My4zek0xNTQgMTA0LjFsMTAyLTM4LjIgMTAyIDM4LjJ2LjZsLTEwMiA0MS40LTEwMi00MS40di0uNnptODQgMjkxLjFsLTg1IDQyLjV2LTc5LjFsODUtMzguOHY3NS40em0wLTExMmwtMTAyIDQxLjQtMTAyLTQxLjR2LS42bDEwMi0zOC4yIDEwMiAzOC4ydi42em0yNDAgMTEybC04NSA0Mi41di03OS4xbDg1LTM4Ljh2NzUuNHptMC0xMTJsLTEwMiA0MS40LTEwMi00MS40di0uNmwxMDItMzguMiAxMDIgMzguMnYuNnoiPjwvcGF0aD48L3N2Zz4K)](https://docs.rs/perpendicular)
+/// [![Docs.rs](https://img.shields.io/badge/docs.rs-perpendicular-66c2a5?style=for-the-badge&labelColor=555555&logoColor=white&logo=data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0
+/// JveD0iMCAwIDUxMiA1MTIiPjxwYXRoIGZpbGw9IiNmNWY1ZjUiIGQ9Ik00ODguNiAyNTAuMkwzOTIgMjE0VjEwNS41YzAtMTUtOS4zLTI4LjQtMjMuNC0zMy43bC0xMDAtMzcuNWMtOC4xLTMuMS0xNy4xLTMuMS0yNS4zIDBsLTEwMCAzNy41Yy0xNC4xIDUuMy0yMy40IDE4LjctMjMuNCAzMy43VjIxNGwtOTYuNiAzNi4yQzkuMyAyNTUuNSAwIDI2OC45IDAgMjgzLjlWMzk0YzAgMTMuNiA3LjcgMjYuMSAxOS45IDMyLjJsMTAwIDUwYzEwLjEgNS4xIDIyLjEgNS4xIDMyLjIgMGwxMDMuOS01MiAxMDMuOSA1MmMxMC4xIDUuMSAyMi4xIDUuMSAzMi4yIDBsMTAwLTUwYzEyLjItNi4xIDE5LjktMTguNiAxOS45LTMyLjJWMjgzLjljMC0xNS05LjMtMjguNC0yMy40LTMzLjd6TTM1OCAyMTQuOGwtODUgMzEuOXYtNjguMmw4NS0zN3Y3My4zek0xNTQgMTA0LjFsMTAyLTM4LjIgMTAyIDM4LjJ2LjZsLTEwMiA0MS40LTEwMi00MS40di0uNnptODQgMjkxLjFsLTg1IDQyLjV2LTc5LjFsODUtMzguOHY3NS40em0wLTExMmwtMTAyIDQxLjQtMTAyLTQxLjR2LS42bDEwMi0zOC4yIDEwMiAzOC4ydi42em0yNDAgMTEybC04NSA0Mi41di03OS4xbDg1LTM4Ljh2NzUuNHptMC0xMTJsLTEwMiA0MS40LTEwMi00MS40di0uNmwxMDItMzguMiAxMDIgMzguMnYuNnoiPjwvcGF0aD48L3N2Zz4K)](https://docs.rs/perpendicular)
 /// [![Crates.io](https://img.shields.io/crates/v/perpendicular?logo=rust&style=for-the-badge)](https://crates.io/crates/perpendicular)
 /// [![Github Workflows](https://img.shields.io/github/workflow/status/jonay2000/perpendicular/label?logo=github&style=for-the-badge)](https://github.com/jonay2000/perpendicular/actions/workflows/ci.yml)
 /// Perpendicular is a simple general purpose n-dimensional vector library.
@@ -560,11 +561,38 @@ macro_rules! length {
     };
 }
 
+mod private {
+    pub trait Sealed {}
+}
+
+/// Trait to allow for turning Vector *and* &Vector into tuples
+///
+/// ```rust
+///
+///
+/// ```
+///
+pub trait AsTuple: private::Sealed {
+    type Res;
+
+    /// Turn a vector into a tuple
+    ///
+    /// ```rust
+    /// # use crate::perpendicular::Vector;
+    /// use perpendicular::AsTuple;
+    /// let v = Vector::new((1, 2, 3, 4));
+    ///
+    /// assert_eq!(v.as_tuple(), (1, 2, 3, 4));
+    /// assert_eq!((&v).as_tuple(), (&1, &2, &3, &4));
+    /// ```
+    fn as_tuple(self) -> Self::Res;
+}
+
 macro_rules! replace_ident {
     ($i:ident => $($j:tt)*) => ($($j)*)
 }
 
-macro_rules! from_tuple {
+macro_rules! impl_tuple {
     ($first: tt $($rest: tt)*) => {
         impl<T> From<(T, $(replace_ident!($rest => T)),*)> for Vector<T, {length!($($rest)*)+1}> {
             #[allow(non_snake_case)]
@@ -572,12 +600,35 @@ macro_rules! from_tuple {
                 Self::new_from_arr([$first, $($rest),*])
             }
         }
-        from_tuple!($($rest)*);
+
+        impl<T> private::Sealed for Vector<T, {length!($($rest)*)+1}> {}
+        impl<'a, T> private::Sealed for &'a Vector<T, {length!($($rest)*)+1}> {}
+
+        impl<T> AsTuple for Vector<T, {length!($($rest)*)+1}> {
+            type Res = (T, $(replace_ident!($rest => T)),*);
+
+            #[allow(non_snake_case)]
+            fn as_tuple(self) -> (T, $(replace_ident!($rest => T)),*) {
+                let [$first, $($rest),*] = self.values;
+                ($first, $($rest),*)
+            }
+        }
+
+        impl<'a, T> AsTuple for &'a Vector<T, {length!($($rest)*)+1}> {
+            type Res = (&'a T, $(replace_ident!($rest => &'a T)),*);
+
+            #[allow(non_snake_case)]
+            fn as_tuple(self) -> (&'a T, $(replace_ident!($rest => &'a T)),*) {
+                let [$first, $($rest),*] = &self.values;
+                ($first, $($rest),*)
+            }
+        }
+        impl_tuple!($($rest)*);
     };
     () => {}
 }
 
-from_tuple!(A B C D E F G H I J K L M N O P Q R S T U V W X Y Z AA AB AC AD AE AF );
+impl_tuple!(A B C D E F G H I J K L M N O P Q R S T U V W X Y Z AA AB AC AD AE AF );
 
 macro_rules! names {
     ($($letters: ident),*;$($rest: tt),*) => {
@@ -731,7 +782,7 @@ where
 
 #[cfg(test)]
 mod tests {
-    use crate::Vector;
+    use crate::{Vector, AsTuple};
 
     #[test]
     pub fn test_letters() {
@@ -793,6 +844,14 @@ mod tests {
         assert_eq!(v.x(), &1);
         let v = Vector::new((1, 2, 3, 4));
         assert_eq!(v.z(), &3);
+    }
+
+    #[test]
+    pub fn test_to_tuple() {
+        let v: Vector<_, 1> = (1,).into();
+        assert_eq!(v.as_tuple(), (1, ));
+        let v = Vector::new((1, 2, 3, 4));
+        assert_eq!(v.as_tuple(), (1, 2, 3, 4));
     }
 
     #[test]

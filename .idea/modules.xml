@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../perpendicular/.idea/vectornd.iml" filepath="$PROJECT_DIR$/../perpendicular/.idea/vectornd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/perpendicular.iml" filepath="$PROJECT_DIR$/.idea/perpendicular.iml" />
     </modules>
   </component>
 </project>
