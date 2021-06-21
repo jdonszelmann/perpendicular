@@ -588,24 +588,24 @@ macro_rules! names {
         impl<T> Vector<T, {length!($($had)*)+1}> {
             $(
                 #[allow(unused)]
-                fn $had(&self) -> &T {
+                pub fn $had(&self) -> &T {
                     self.get($had_length).expect(same_length!())
                 }
                 concat_idents::concat_idents!(fn_name = $had, _mut {
                     #[allow(unused)]
-                    fn fn_name(&mut self) -> &mut T {
+                    pub fn fn_name(&mut self) -> &mut T {
                         self.get_mut($had_length).expect(same_length!())
                     }
                 });
             )*
 
             #[allow(unused)]
-            fn $letter(&self) -> &T {
+            pub fn $letter(&self) -> &T {
                 self.get(length!($($had)*)).expect(same_length!())
             }
             concat_idents::concat_idents!(fn_name = $letter, _mut {
                 #[allow(unused)]
-                fn fn_name(&mut self) -> &mut T {
+                pub fn fn_name(&mut self) -> &mut T {
                     self.get_mut(length!($($had)*)).expect(same_length!())
                 }
             });
@@ -618,12 +618,12 @@ macro_rules! names {
         impl<T> Vector<T, {length!($($had)*)+1 + length!($($rest)*)}> {
             $(
                 #[allow(unused)]
-                fn $had(&self) -> &T {
+                pub fn $had(&self) -> &T {
                     self.get($had_length).expect(same_length!())
                 }
                 concat_idents::concat_idents!(fn_name = $had, _mut {
                     #[allow(unused)]
-                    fn fn_name(&mut self) -> &mut T {
+                    pub fn fn_name(&mut self) -> &mut T {
                         self.get_mut($had_length).expect(same_length!())
                     }
                 });
