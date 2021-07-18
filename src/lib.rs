@@ -292,7 +292,10 @@ impl<T, const DIM: usize> Vector<T, DIM> {
     /// let v = Vector::new((0, 0, 0));
     /// assert_eq!(Vector::zero(), v);
     /// ```
-    pub fn zero() -> Self where T: num::Num + Clone {
+    pub fn zero() -> Self
+    where
+        T: num::Num + Clone,
+    {
         Self::repeat(T::zero())
     }
 
@@ -304,7 +307,10 @@ impl<T, const DIM: usize> Vector<T, DIM> {
     /// let v = Vector::new((1, 1, 1));
     /// assert_eq!(Vector::one(), v);
     /// ```
-    pub fn one() -> Self where T: num::Num + Clone {
+    pub fn one() -> Self
+    where
+        T: num::Num + Clone,
+    {
         Self::repeat(T::one())
     }
 }
@@ -782,7 +788,7 @@ where
 
 #[cfg(test)]
 mod tests {
-    use crate::{Vector, AsTuple};
+    use crate::{AsTuple, Vector};
 
     #[test]
     pub fn test_letters() {
@@ -849,7 +855,7 @@ mod tests {
     #[test]
     pub fn test_to_tuple() {
         let v: Vector<_, 1> = (1,).into();
-        assert_eq!(v.as_tuple(), (1, ));
+        assert_eq!(v.as_tuple(), (1,));
         let v = Vector::new((1, 2, 3, 4));
         assert_eq!(v.as_tuple(), (1, 2, 3, 4));
     }
