@@ -1,7 +1,7 @@
 [package]
 name = "perpendicular"
-version = "0.1.8"
-edition = "2018"
+version = "0.1.9"
+edition = "2021"
 license = "Apache-2.0"
 description = "Perpendicular is a simple general purpose n-dimensional vector library."
 keywords = ["vector", "physics", "simulation"]
